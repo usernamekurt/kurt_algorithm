@@ -30,5 +30,3 @@ if (newS.length % 2 === 0) {
 }
 return true;
 };
-
-console.log(isPalindrome("raceacar"))
