@@ -19,12 +19,6 @@ function isAnagram (s, t) {
 
   const counterS = CountElem(arrS);
   const counterT = CountElem(arrT);
-  console.log(counterS)
-  console.log(counterT)
-  console.log(counterS["t"] !== undefined)
-  console.log(counterT["t"])
-
-
   const keys = Object.keys(counterS);
 
 
