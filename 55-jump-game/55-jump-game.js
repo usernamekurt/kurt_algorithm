@@ -9,7 +9,6 @@ function canJump(nums) {
         break;
       }
     }
-    if (dpPositions[j] === false) return false
   }
-  return true;
+  return dpPositions[dpPositions.length - 1];
 }
