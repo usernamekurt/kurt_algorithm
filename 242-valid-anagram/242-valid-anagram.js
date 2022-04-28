@@ -1,33 +1,19 @@
-function isAnagram (s, t) {
-  const arrS = Array.from(s);
-  const arrT = Array.from(t);
-  let outcome = true;
-  function CountElem(arr){
-    const counter = {};
-    for(let i = 0; i < arr.length; i++) {
-      if(!counter[arr[i]]){
-        counter[arr[i]] = 1;
-      }
-      counter[arr[i]] += 1;
+function isAnagram(s, t) {
+  if (s.length !== t.length) return false;
+
+  let counter = {};
+
+  for (let i = 0; i < s.length; i++) {
+    if (counter[s[i]] === undefined) {
+      counter[s[i]] = 0;
     }
-    return counter;
+    counter[s[i]] += 1;
   }
-  
-  if(arrS.length !== arrT.length){
-    return false;
+  console.log(counter)
+  for (let i = 0; i < t.length; i++) {
+    if (counter[t[i]] <= 0 || counter[t[i]] === undefined) return false;
+    counter[t[i]] -= 1;
   }
 
-  const counterS = CountElem(arrS);
-  const counterT = CountElem(arrT);
-  const keys = Object.keys(counterS);
-
-
-  keys.forEach((elem) => {
-    if(counterS[elem] !== counterT[elem]){
-      outcome = false;
-      return outcome;
-    }
-    
-  })
-  return outcome;  
+  return true;
 }
