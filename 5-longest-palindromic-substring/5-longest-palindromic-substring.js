@@ -1,27 +1,25 @@
 function longestPalindrome(s) {
-  s = s.replace(" ","").replace(/[^A-Za-z0-9]/,"");
+  let maxLen = 0;
+  let maxLeft = 0;
+  let maxRight = 0;
+  
+  for (let i = 0; i < s.length; i++) {
+    searchSameChr(i, i);
+    searchSameChr(i, i+1);
+  }
 
-  let maxLength = 1;
-  let start = 0;
-  let end = 0;
-  function searchPalindrome(left, right){
-    let curLength = 0
-    while((left >= 0) && (right <= s.length -1) && (s[left] === s[right])){
-      curLength = right - left + 1;
-      if( curLength > maxLength){
-        maxLength = curLength;
-        start = left;
-        end = right;
+  function searchSameChr (left, right) {
+    while (left >= 0 && right < s.length && s[left] === s[right]) {
+      const currentLen = right - left + 1;
+      if (currentLen > maxLen) {
+        maxLen = currentLen;
+        maxLeft = left;
+        maxRight = right;
       }
       left--;
       right++;
-      }
     }
-
-  for (let i = 0; i < s.length -1 ;  i++){
-    searchPalindrome(i - 1, i + 1);
-    searchPalindrome(i, i + 1);
   }
-  return s.slice(start, end+1);
-}
 
+  return s.slice(maxLeft, maxRight+1)
+}
