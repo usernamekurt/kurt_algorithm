@@ -1,33 +1,22 @@
 function isValid(s) {
   if (s.length % 2 === 1) return false;
-  const arrBracket = s.split("");
-  const stackBracket = [];
-  const stackItems = {
-    "(": 0,
-    "{": 1,
-    "[": 2,
-  };
-  const popItems = {
-    ")": 0,
-    "}": 1,
-    "]": 2,
+
+  const hashTable = {
+    "(": ")",
+    "{": "}",
+    "[": "]",
   };
 
-  while (arrBracket[0]) {
-    const item = arrBracket.shift();
-    if (item === "(" || item === "{" || item === "[") {
-      stackBracket.unshift(item);
-    } else {
-      if (popItems[`${item}`] !== stackItems[`${stackBracket[0]}`]) {
-        return false;
-      } else {
-        stackBracket.shift();
-      }
+  let stack = [];
+
+  for (let i = 0; i < s.length; i++) {
+    const parenthese = s[i];
+    if (hashTable[parenthese]) {
+      stack.push(parenthese);
+    } else if (parenthese !== hashTable[stack.pop()] ) {
+      return false
     }
   }
-  if (!stackBracket[0]) {
-    return true;
-  } else {
-    return false;
-  }
+  if (stack.length > 0) return false;
+  return true;
 }
