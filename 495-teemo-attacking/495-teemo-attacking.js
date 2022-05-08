@@ -1,26 +1,21 @@
 function findPoisonedDuration(timeSeries, duration) {
-  if (timeSeries.length === 0) return 0;
-  if (timeSeries.length === 1) return duration;
-
-  let poisonedTime = 0;
-  let start = timeSeries[0];
-  let end = timeSeries[0] + duration;
-  console.log(end);
+  let startTime = timeSeries[0];
+  let endTime = Infinity;
+  let countPoisonedTime = 0;
 
   for (let i = 0; i < timeSeries.length; i++) {
-    console.log(timeSeries[i]);
-    if (timeSeries[i] <= end) {
-      end = timeSeries[i] + duration;
-    } else {
-      console.log(start, end);
-      poisonedTime += end - start;
-      start = timeSeries[i];
-      end = timeSeries[i] + duration;
-    }
+    const currentTime = timeSeries[i];
 
-    if (i === timeSeries.length - 1) {
-      poisonedTime += end - start;
+    if (currentTime <= endTime) {
+      endTime = currentTime + duration;
+    } else {
+      countPoisonedTime += endTime - startTime;
+      startTime = currentTime;
+      endTime = currentTime + duration;
     }
   }
-  return poisonedTime;
+
+  countPoisonedTime += endTime - startTime;
+
+  return countPoisonedTime;
 }
