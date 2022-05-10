@@ -1,14 +1,11 @@
-function canJump(nums) {
-  let dpPositions = new Array(nums.length).fill(false);
-  dpPositions[0] = true;
+const canJump = (nums) => {
+  let maxJumpToIndex = 0;
 
-  for (let j = 1; j < nums.length; j++) {
-    for (let i = 0; i < j; i++) {
-      if (dpPositions[i] && i + nums[i] >= j) {
-        dpPositions[j] = true;
-        break;
-      }
-    }
+  for (let i = 0; i < nums.length; i++) {
+    if (maxJumpToIndex < i) return false;
+    maxJumpToIndex = Math.max(maxJumpToIndex, i + nums[i]);
+    if (maxJumpToIndex >= nums.length - 1) return true;
   }
-  return dpPositions[dpPositions.length - 1];
 }
+
+console.log(canJump([2,3,1,1,4]))
