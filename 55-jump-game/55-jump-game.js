@@ -7,5 +7,3 @@ const canJump = (nums) => {
     if (maxJumpToIndex >= nums.length - 1) return true;
   }
 }
-
-console.log(canJump([2,3,1,1,4]))
