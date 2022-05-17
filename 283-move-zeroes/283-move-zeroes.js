@@ -1,15 +1,13 @@
-/**
- * @param {number[]} nums
- * @return {void} Do not return anything, modify nums in-place instead.
- */
-var moveZeroes = function(nums) {
-    let pointer = 0;
-    for (let i = 0; i < nums.length; i++) {
-        if (nums[pointer] === 0) {
-            const num = nums.splice(pointer, 1);
-            nums.push(num);
-        } else {
-            pointer ++;
-        };
-    };
+var moveZeroes = function (nums) {
+  const lenOrigin = nums.length;
+  for (let i = 0; i < lenOrigin; i++) {
+    const num = nums.shift();
+    if (num !== 0) {
+      nums.push(num);
+    }
+  }
+  const zeroes = new Array(lenOrigin - nums.length).fill(0);
+  nums.push(...zeroes);
+  return nums;
 };
+
