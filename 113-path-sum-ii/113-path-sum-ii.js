@@ -21,7 +21,6 @@ var pathSum = function(root, targetSum) {
     function dfs(node, arr, currentSum) {
         currentSum += node.val;
         arr.push(node.val);
-        const temp = [...arr];
         if (node.left === null && node.right === null) {
             if (currentSum === targetSum) {
                 res.push(arr);
@@ -29,9 +28,8 @@ var pathSum = function(root, targetSum) {
             return;
         }
         
-        if (node.left) dfs(node.left, arr, currentSum);
-        arr = temp;
-        if (node.right) dfs(node.right, arr, currentSum);
+        if (node.left) dfs(node.left, [...arr], currentSum);
+        if (node.right) dfs(node.right, [...arr], currentSum);
     }
     
 };
