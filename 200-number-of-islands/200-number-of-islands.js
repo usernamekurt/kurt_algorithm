@@ -5,12 +5,12 @@ function numIslands(grid) {
     for (let col = 0; col < grid[0].length; col++) {
       if (grid[row][col] === "1") {
         count++;
-        dfs(grid, row, col);
+        dfs(row, col);
       }
     }
   }
 
-  function dfs(grid, row, col) {
+  function dfs(row, col) {
     if (
       row < 0 ||
       row >= grid.length ||
@@ -22,10 +22,10 @@ function numIslands(grid) {
     }
 
     grid[row][col] = "0";
-    dfs(grid, row - 1, col);
-    dfs(grid, row + 1, col);
-    dfs(grid, row, col - 1);
-    dfs(grid, row, col + 1);
+    dfs(row - 1, col);
+    dfs(row + 1, col);
+    dfs(row, col - 1);
+    dfs(row, col + 1);
   }
   return count;
 }
