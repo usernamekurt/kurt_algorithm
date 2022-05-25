@@ -3,18 +3,14 @@
  * @return {boolean}
  */
 var isPerfectSquare = function(num) {
-    if (num === 1) return true;
-    
-    let  i = 2;
-    while(true){
-        const iSquare = i**2
-        if ( iSquare === num ) {
+    let i = 1;
+    while(true) {
+        if (num > i**2) {
+            i++;
+        } else if (num === i**2) {
             return true;
-        } else if ( num % iSquare === 0) {
-            num === num / iSquare;
-        } else if ( num < iSquare ){
+        } else {
             return false;
         }
-        i++;
-     }
-};
+    }
+}
