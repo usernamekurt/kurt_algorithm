@@ -1,22 +1,17 @@
-var hasPathSum = function (root, sumTarget) {
-  let res = false;
-
-  function helper(node, currentSum) {
-    if (!node || res) {
-      return;
-    }
-
-    currentSum += node.val;
-
-    if (!node.left && !node.right && currentSum === sumTarget) {
-      res = true;
-      return;
-    }
-
-    helper(node.left, currentSum);
-    helper(node.right, currentSum);
-  }
-  
-  helper(root, 0);
-  return res;
+var hasPathSum = function(root, sum) {
+    return dfs(root, 0, sum);
 };
+
+var dfs = function(curr, currentSum, targetSum) {
+    if (!curr) {
+        return false;
+    }
+
+    currentSum += curr.val;
+    
+    if (curr.left === null && curr.right === null) {
+        return currentSum === targetSum;
+    }
+    
+    return dfs(curr.left, currentSum, targetSum) || dfs(curr.right, currentSum, targetSum);
+}
