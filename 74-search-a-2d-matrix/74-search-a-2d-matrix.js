@@ -4,26 +4,25 @@
  * @return {boolean}
  */
 var searchMatrix = function(matrix, target) {
-    const m = matrix.length - 1;
-    const n = matrix[0].length - 1;
-    let rowIndex = m;
+    let row = matrix.length;
+    let col = matrix[0].length;
+    if (row === 1 && col === 1) return matrix[row - 1][col - 1] === target; 
     
-    if ((target < matrix[0][0]) || (target > matrix[m][n])) return false;
+    let start = 0;
+    let end = row * col - 1;
     
-    //target이 속한 행 찾기
-    for (let row = 1; row <= m; row++) {
-        if (target < matrix[row][0]) {
-            rowIndex = row - 1;
-            break;
-        }; 
-    };
-    
-    //행 안에서 같은 값이 있으면 true. 반복이 끝나도 없으면 false
-    for (let col = 0; col <= n; col++) {
-        if (matrix[rowIndex][col] === target) {
+    while (start <= end) {
+        const mid = parseInt((start + end) / 2);
+        const m = parseInt(mid / col);
+        const n = mid % col;
+        
+        if (matrix[m][n] === target) {
             return true;
-        };
-    };
-    return false;
-    
+        } else if (matrix[m][n] > target) {
+            end = mid - 1;
+        } else if (matrix[m][n] < target) {
+            start = mid + 1;
+        }
+    }
+    return false
 };
